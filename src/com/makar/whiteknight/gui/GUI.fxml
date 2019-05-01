@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ComboBox fx:id="priceSelector" layoutX="47.0" layoutY="65.0" prefWidth="150.0" promptText="Max Price" />
+      <Label layoutX="47.0" layoutY="48.0" text="Script will not buy anything higher than this price:" />
+      <Label layoutX="47.0" layoutY="20.0" text="Start the script up inside the White Knight's Castle next to Sir Vyvin." />
+      <Button fx:id="startButton" layoutX="47.0" layoutY="99.0" mnemonicParsing="false" text="Start" />
+   </children>
+</Pane>

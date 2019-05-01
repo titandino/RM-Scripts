@@ -1,0 +1,27 @@
+<manifest>
+    <main-class>com.makar.whiteknight.WhiteKnightDA</main-class>
+    <name>Makar White Knight Disassembler</name>
+    <description>Disassembles items in the white knight shop.</description>
+    <tag-line>White knights supply all my components.</tag-line><!--Max of 50 chars-->
+    <version>1.0.1</version>
+    <compatibility>
+        <game-type>RS3</game-type>
+    </compatibility>
+    <categories>
+        <category>INVENTION</category>
+    </categories>
+    <!--Required to publish on the bot store-->
+    <internal-id>makarwkda</internal-id>
+    <!--The rest are optional-->
+    <open-source>true</open-source>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>public</access>
+    <tags>
+        <tag>Makar</tag>
+        <tag>Invention</tag>
+        <tag>Disassemble</tag>
+    </tags>
+    <resources>
+		<resource>com/makar/whiteknight/gui/GUI.fxml</resource>
+	</resources>
+</manifest>

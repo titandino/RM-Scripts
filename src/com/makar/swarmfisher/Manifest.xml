@@ -1,0 +1,27 @@
+<manifest>
+    <main-class>com.makar.swarmfisher.SwarmFisher</main-class>
+    <name>Makar Swarm Fisher</name>
+    <description>Fishes efficiently at the swarm in the deep sea area.</description>
+    <tag-line>Because paid scripts bank like idiots.</tag-line><!--Max of 50 chars-->
+    <version>1.0.0</version>
+    <compatibility>
+        <game-type>RS3</game-type>
+    </compatibility>
+    <categories>
+        <category>FISHING</category>
+    </categories>
+    <!--Required to publish on the bot store-->
+    <internal-id>makarswarm</internal-id>
+    <!--The rest are optional-->
+    <open-source>true</open-source>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>public</access>
+    <tags>
+        <tag>Makar</tag>
+        <tag>Fishing</tag>
+        <tag>Deep Sea</tag>
+    </tags>
+    <resources>
+		<resource>com/makar/swarmfisher/gui/GUI.fxml</resource>
+	</resources>
+</manifest>
