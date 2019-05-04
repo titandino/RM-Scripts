@@ -10,6 +10,8 @@ import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.entities.Npc;
 import com.runemate.game.api.hybrid.local.Camera;
 import com.runemate.game.api.hybrid.local.Skill;
+import com.runemate.game.api.hybrid.local.hud.interfaces.Chatbox;
+import com.runemate.game.api.hybrid.local.hud.interfaces.Chatbox.Message;
 import com.runemate.game.api.hybrid.local.hud.interfaces.InterfaceComponent;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Interfaces;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
@@ -42,6 +44,7 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 	
 	private HashMap<String, String> fishCaught = new HashMap<String, String>();
 	private double levelProgress = 0.0;
+	private int toolLevel = 0;
 	private String levelText = "No data";
 	
 	public SwarmFisher() {
@@ -74,9 +77,12 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 	public void onLoop() {
 		setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
 		
-//		if (Chatbox.newQuery().textContains("Your Fishing rod-o-matic has gained a level! It is now level ")) {
-//			
-//		}
+		Message toolMessage = Chatbox.newQuery().textContains("has gained a level! It is now level ").results().last();
+		if (toolMessage != null) {
+			try {
+				toolLevel = Integer.valueOf(toolMessage.getMessage().substring(toolMessage.getMessage().indexOf("now level ")).replace("now level ", "").replace(".", ""));
+			} catch(Exception e) { }
+		}
 
 		switch (stage) {
 		
@@ -153,7 +159,7 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 		else
 			fishCaught.put(name, "" + (Integer.valueOf(current) + event.getQuantityChange()));
 		levelProgress = (double) (100-Skill.FISHING.getExperienceToNextLevelAsPercent()) / 100.0;
-		levelText = Skill.FISHING.getCurrentLevel() + " (TNL: " + new DecimalFormat("#,###,###").format(Skill.FISHING.getExperienceToNextLevel()) + ")";
+		levelText = Skill.FISHING.getCurrentLevel() + " (TNL: " + new DecimalFormat("#,###,###").format(Skill.FISHING.getExperienceToNextLevel()) + ") Tool: " + toolLevel;
 		Platform.runLater(() -> controller.update());
 	}
 	
