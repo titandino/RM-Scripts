@@ -1,8 +1,9 @@
-package com.makar.whiteknight;
+package com.makar.scripts.whiteknightda;
 
 import java.io.IOException;
 import java.util.List;
-import com.makar.whiteknight.gui.WKDAGUIController;
+
+import com.makar.scripts.whiteknightda.gui.WKDAGUIController;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.entities.Npc;
@@ -16,7 +17,6 @@ import com.runemate.game.api.hybrid.region.GameObjects;
 import com.runemate.game.api.hybrid.region.Npcs;
 import com.runemate.game.api.hybrid.region.Players;
 import com.runemate.game.api.hybrid.util.Resources;
-import com.runemate.game.api.hybrid.util.calculations.Random;
 import com.runemate.game.api.rs3.local.hud.interfaces.eoc.ActionBar;
 import com.runemate.game.api.rs3.local.hud.interfaces.eoc.ActionBar.Slot;
 import com.runemate.game.api.script.Execution;
@@ -49,7 +49,7 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 			loader.setController(new WKDAGUIController(this));
 			Node node;
 			try {
-				node = loader.load(Resources.getAsStream("com/makar/whiteknight/gui/GUI.fxml"));
+				node = loader.load(Resources.getAsStream("com/makar/scripts/whiteknight/gui/GUI.fxml"));
 				interfaceProperty = new SimpleObjectProperty<>(node);
 			} catch (IOException e) {
 				e.printStackTrace();

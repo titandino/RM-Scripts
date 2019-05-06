@@ -1,10 +1,11 @@
-package com.makar.swarmfisher.gui;
+package com.makar.scripts.swarmfisher.gui;
 
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.makar.swarmfisher.SwarmFisher;
+import com.makar.scripts.swarmfisher.SwarmFisher;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

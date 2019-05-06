@@ -1,5 +1,5 @@
 <manifest>
-    <main-class>com.makar.swarmfisher.SwarmFisher</main-class>
+    <main-class>com.makar.scripts.swarmfisher.SwarmFisher</main-class>
     <name>Makar Swarm Fisher</name>
     <description>Fishes efficiently at the swarm in the deep sea area.</description>
     <tag-line>Because paid scripts bank like idiots.</tag-line><!--Max of 50 chars-->
@@ -22,6 +22,6 @@
         <tag>Deep Sea</tag>
     </tags>
     <resources>
-		<resource>com/makar/swarmfisher/gui/GUI.fxml</resource>
+		<resource>com/makar/scripts/swarmfisher/gui/GUI.fxml</resource>
 	</resources>
 </manifest>

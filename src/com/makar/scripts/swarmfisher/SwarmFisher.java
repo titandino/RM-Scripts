@@ -1,10 +1,12 @@
-package com.makar.swarmfisher;
+package com.makar.scripts.swarmfisher;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
-import com.makar.swarmfisher.gui.SwarmGUIController;
+import com.makar.scripts.swarmfisher.gui.SwarmGUIController;
+import com.makar.util.Antiban;
+import com.makar.util.Movement;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.entities.Npc;
@@ -63,7 +65,7 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 			loader.setController(controller);
 			Node node;
 			try {
-				node = loader.load(Resources.getAsStream("com/makar/swarmfisher/gui/GUI.fxml"));
+				node = loader.load(Resources.getAsStream("com/makar/scripts/swarmfisher/gui/GUI.fxml"));
 				interfaceProperty = new SimpleObjectProperty<>(node);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -91,12 +93,12 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 			if (swarm != null) {
 				if (swarm.getVisibility() > 30 && swarm.interact("Net")) {
 					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), MIN_AFKWARDEN_TIMER, MAX_AFKWARDEN_TIMER);
-					Util.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
+					Antiban.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
 				} else {
 					if (Random.nextGaussian(0, 100) > 70) {
 						Camera.concurrentlyTurnTo(swarm);
 					} else {
-						Util.runToAdvanced(swarm, (int) Math.round(Random.nextGaussian(1, 5, 3)));
+						Movement.runToWithVariance(swarm, (int) Math.round(Random.nextGaussian(1, 5, 3)));
 					}
 				}
 			}
@@ -121,7 +123,7 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 					if (Random.nextGaussian(0, 100) > 75) {
 						Camera.concurrentlyTurnTo(net);
 					} else {
-						Util.runToAdvanced(net, (int) Math.round(Random.nextGaussian(1, 5, 3)));
+						Movement.runToWithVariance(net, (int) Math.round(Random.nextGaussian(1, 5, 3)));
 					}
 				}
 			}

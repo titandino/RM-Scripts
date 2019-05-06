@@ -1,9 +1,9 @@
-package com.makar.whiteknight.gui;
+package com.makar.scripts.whiteknightda.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.makar.whiteknight.WhiteKnightDA;
+import com.makar.scripts.whiteknightda.WhiteKnightDA;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

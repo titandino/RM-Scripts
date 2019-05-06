@@ -1,5 +1,5 @@
 <manifest>
-    <main-class>com.makar.whiteknight.WhiteKnightDA</main-class>
+    <main-class>com.makar.scripts.whiteknight.WhiteKnightDA</main-class>
     <name>Makar White Knight Disassembler</name>
     <description>Disassembles items in the white knight shop.</description>
     <tag-line>White knights supply all my components.</tag-line><!--Max of 50 chars-->
@@ -22,6 +22,6 @@
         <tag>Disassemble</tag>
     </tags>
     <resources>
-		<resource>com/makar/whiteknight/gui/GUI.fxml</resource>
+		<resource>com/makar/scripts/whiteknight/gui/GUI.fxml</resource>
 	</resources>
 </manifest>
