@@ -34,6 +34,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryListener, ChatboxListener {
+	
+	private static final int MIN_AFKWARDEN_TIMER = 60_000; //60 seconds because nice even number threshholds aren't horrific and definitely human-like
+	private static final int MAX_AFKWARDEN_TIMER = 240_000; //240 seconds
 
 	private enum Stage {
 		FISHING, BANKING, CLAIM_FISHING_NOTES
@@ -76,8 +79,6 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 
 	@Override
 	public void onLoop() {
-		setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
-
 		switch (stage) {
 
 		case FISHING:
@@ -88,12 +89,11 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 
 			Npc swarm = Npcs.newQuery().names("Swarm").actions("Net").results().nearest();
 			if (swarm != null) {
-				if (swarm.getVisibility() > 30) {
-					swarm.interact("Net");
-					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 34322, 132692);
-					Util.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 30))));
+				if (swarm.getVisibility() > 30 && swarm.interact("Net")) {
+					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), MIN_AFKWARDEN_TIMER, MAX_AFKWARDEN_TIMER);
+					Util.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
 				} else {
-					if (Random.nextGaussian(0, 100, 50) > 47) {
+					if (Random.nextGaussian(0, 100) > 70) {
 						Camera.concurrentlyTurnTo(swarm);
 					} else {
 						Util.runToAdvanced(swarm, (int) Math.round(Random.nextGaussian(1, 5, 3)));
@@ -115,11 +115,10 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 
 			GameObject net = GameObjects.newQuery().names("Magical net").results().nearest();
 			if (net != null) {
-				if (net.getVisibility() > 30) {
-					net.interact("Deposit-All");
-					Execution.delayUntil(() -> Inventory.isEmpty(), 6029, 11323);
+				if (net.getVisibility() > 30 && net.interact("Deposit-All")) {
+					Execution.delayUntil(() -> Inventory.isEmpty());
 				} else {
-					if (Random.nextGaussian(0, 100, 50) > 47) {
+					if (Random.nextGaussian(0, 100) > 75) {
 						Camera.concurrentlyTurnTo(net);
 					} else {
 						Util.runToAdvanced(net, (int) Math.round(Random.nextGaussian(1, 5, 3)));
