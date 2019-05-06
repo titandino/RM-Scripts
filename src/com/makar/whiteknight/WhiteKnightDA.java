@@ -19,6 +19,7 @@ import com.runemate.game.api.hybrid.util.Resources;
 import com.runemate.game.api.hybrid.util.calculations.Random;
 import com.runemate.game.api.rs3.local.hud.interfaces.eoc.ActionBar;
 import com.runemate.game.api.rs3.local.hud.interfaces.eoc.ActionBar.Slot;
+import com.runemate.game.api.script.Execution;
 import com.runemate.game.api.script.framework.LoopingBot;
 
 import javafx.beans.property.ObjectProperty;
@@ -67,8 +68,6 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 		if (priceCutoff < 0)
 			return;
 		
-		setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
-
 		switch (stage) {
 		case BUYING:
 			if (Inventory.getEmptySlots() <= 2) {
@@ -86,9 +85,8 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 				if (shopItem != null) {
 					//Only way to click a shop item since shop API has zero click data. Woo hoo.
 					InterfaceComponent item = Interfaces.getAt(1265, 33, shopItem.getIndex());
-					if (item != null) {
-						item.interact("Buy All");
-						setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
+					if (item != null && item.interact("Buy All")) {
+						Execution.delay(1250, 3500);
 					}
 				}
 			} else {
@@ -97,20 +95,16 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 					if (!owner.getPosition().isReachable()) {
 						GameObject door = GameObjects.newQuery().names("Door").filter(o -> o.getPosition().isReachable()).results().nearest();
 						if (door != null && door.interact("Open")) {
-							setLoopDelay(((int) Math.round(Random.nextGaussian(2138, 4293, 2850))));
+							Execution.delayWhile(() -> Players.getLocal().isMoving());
 						}
 						return;
+					} else if (owner.interact("Trade")) {
+						Execution.delayWhile(() -> !Shop.isOpen());
 					}
-					owner.interact("Trade");
-					setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
 				}
 			}
 			break;
 		case DISASSEMBLING:
-			if (Players.getLocal().getAnimationId() == 27997) {
-				setLoopDelay(((int) Math.round(Random.nextGaussian(1130, 2232, 1500))));
-				return;
-			}
 			if (Inventory.isEmpty()) {
 				stage = Stage.BUYING;
 				return;
@@ -121,10 +115,8 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 			}
 			if (disassemble != null) {
 				SpriteItem item = Inventory.getItems().first();
-				if (item != null) {
-					disassemble.activate();
-					item.click();
-					setLoopDelay(((int) Math.round(Random.nextGaussian(2138, 4293, 2850))));
+				if (item != null && disassemble.activate() && item.click()) {
+					Execution.delayWhile(() -> Players.getLocal().getAnimationId() == 27997, 2500, 3500);
 				}
 			} else {
 				disassemble = ActionBar.newQuery().names("Disassemble").results().first();
