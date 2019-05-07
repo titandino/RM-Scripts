@@ -6,12 +6,10 @@ import java.util.HashMap;
 
 import com.makar.scripts.swarmfisher.gui.SwarmGUIController;
 import com.makar.util.Antiban;
-import com.makar.util.Movement;
 import com.makar.util.Interactions;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.entities.Npc;
-import com.runemate.game.api.hybrid.local.Camera;
 import com.runemate.game.api.hybrid.local.Skill;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Chatbox.Message.Type;
 import com.runemate.game.api.hybrid.local.hud.interfaces.InterfaceComponent;
