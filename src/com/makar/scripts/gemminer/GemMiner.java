@@ -91,8 +91,8 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 45000, 65000);
 			} else {
 				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(gemRockName.contains("Precious") ? PRECIOUS_MINE : MINE);
-				if (path != null && path.step()) {
-					
+				if (path != null) {
+					path.step();
 				}
 			}
 			break;
@@ -105,8 +105,8 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 
 			if (!Bank.open()) {
 				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(Landmark.BANK);
-				if (path != null && path.step()) {
-					
+				if (path != null) {
+					path.step();
 				}
 			} else {
 				Execution.delayUntil(() -> Bank.isOpen(), 15000, 30000);
