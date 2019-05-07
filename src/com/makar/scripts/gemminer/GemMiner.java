@@ -35,6 +35,7 @@ import javafx.scene.Node;
 public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListener {
 	
 	private static final Area MINE = Area.circular(new Coordinate(3298, 3298, 0), 5);
+	private static final Area PRECIOUS_MINE = Area.circular(new Coordinate(1182, 4510, 0), 5);
 
 	private enum Stage {
 		MINING, BANKING
@@ -76,6 +77,8 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 
 	@Override
 	public void onLoop() {
+		String gemRockName = getGemRockType();
+		
 		switch (stage) {
 		case MINING:
 			if (Inventory.isFull()) {
@@ -83,13 +86,25 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				return;
 			}
 
-			GameObject gemRock = GameObjects.newQuery().names("Gem Rocks").actions("Mine").results().nearest();
-			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
-				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
+			if (gemRockName.contains("Precious")) {
+				GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
+				if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
+					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
+				} else {
+					WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(PRECIOUS_MINE);
+					if (path != null && path.step()) {
+						
+					}
+				}
 			} else {
-				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(MINE);
-				if (path != null && path.step()) {
-					
+				GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
+				if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
+					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
+				} else {
+					WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(MINE);
+					if (path != null && path.step()) {
+						
+					}
 				}
 			}
 			break;
@@ -126,6 +141,14 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 		levelProgress = (double) (100 - Skill.MINING.getExperienceToNextLevelAsPercent()) / 100.0;
 		levelText = Skill.MINING.getCurrentLevel() + " (TNL: " + new DecimalFormat("#,###,###").format(Skill.MINING.getExperienceToNextLevel()) + ")";
 		Platform.runLater(() -> controller.update());
+	}
+	
+	public String getGemRockType() {
+		if (Skill.MINING.getCurrentLevel() >= 25)
+			return "Precious gem rock";
+		if (Skill.MINING.getCurrentLevel() >= 20)
+			return "Uncommon gem rock";
+		return "Common gem rock";
 	}
 
 	public HashMap<String, String> getGemsMined() {
