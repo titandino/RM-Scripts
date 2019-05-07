@@ -115,15 +115,6 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 				if (Interactions.walkOrTurnTo(net, "Deposit-All", 75)) {
 					Execution.delayUntil(() -> Inventory.isEmpty());
 				}
-				if (net.getVisibility() > 30 && net.interact("Deposit-All")) {
-					Execution.delayUntil(() -> Inventory.isEmpty());
-				} else {
-					if (Random.nextGaussian(0, 100) > 75) {
-						Camera.concurrentlyTurnTo(net);
-					} else {
-						Movement.runToWithVariance(net, (int) Math.round(Random.nextGaussian(1, 5, 3)));
-					}
-				}
 			}
 			break;
 
