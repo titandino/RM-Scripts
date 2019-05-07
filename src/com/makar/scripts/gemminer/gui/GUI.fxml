@@ -8,14 +8,14 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="159.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Makar Swarm Fisher">
+      <Text layoutX="159.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Makar Gem Miner">
          <font>
             <Font name="Calibri Bold" size="33.0" />
          </font>
       </Text>
       <TableView fx:id="gemTable" layoutX="316.0" layoutY="79.0" prefHeight="286.0" prefWidth="266.0" />
       <ProgressBar fx:id="levelBar" layoutX="14.0" layoutY="129.0" prefHeight="41.0" prefWidth="281.0" progress="0.0" />
-      <Text layoutX="98.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fishing Level:">
+      <Text layoutX="98.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mining Level:">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
