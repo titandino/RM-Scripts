@@ -9,6 +9,8 @@ import com.makar.util.Interact;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.input.Keyboard;
+import com.runemate.game.api.hybrid.input.Mouse;
+import com.runemate.game.api.hybrid.input.Mouse.Button;
 import com.runemate.game.api.hybrid.local.Skill;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Bank;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
@@ -89,7 +91,8 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 
 			GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
 			if (Players.getLocal().getAnimationId() != -1 && gemRock != null) {
-				gemRock.click();
+				if (gemRock.hovered() || gemRock.hover())
+					Mouse.click(Button.LEFT);
 				Execution.delay(4000, 6500);
 				return;
 			}
