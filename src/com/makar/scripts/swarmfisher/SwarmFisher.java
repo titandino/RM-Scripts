@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.makar.scripts.swarmfisher.gui.SwarmGUIController;
 import com.makar.util.Antiban;
 import com.makar.util.Movement;
+import com.makar.util.Interactions;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.entities.Npc;
@@ -91,15 +92,9 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 
 			Npc swarm = Npcs.newQuery().names("Swarm").actions("Net").results().nearest();
 			if (swarm != null) {
-				if (swarm.getVisibility() > 30 && swarm.interact("Net")) {
+				if (Interactions.walkOrTurnTo(swarm, "Net", 70)) {
 					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), MIN_AFKWARDEN_TIMER, MAX_AFKWARDEN_TIMER);
 					Antiban.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
-				} else {
-					if (Random.nextGaussian(0, 100) > 70) {
-						Camera.concurrentlyTurnTo(swarm);
-					} else {
-						Movement.runToWithVariance(swarm, (int) Math.round(Random.nextGaussian(1, 5, 3)));
-					}
 				}
 			}
 			break;
@@ -117,6 +112,9 @@ public class SwarmFisher extends LoopingBot implements EmbeddableUI, InventoryLi
 
 			GameObject net = GameObjects.newQuery().names("Magical net").results().nearest();
 			if (net != null) {
+				if (Interactions.walkOrTurnTo(net, "Deposit-All", 75)) {
+					Execution.delayUntil(() -> Inventory.isEmpty());
+				}
 				if (net.getVisibility() > 30 && net.interact("Deposit-All")) {
 					Execution.delayUntil(() -> Inventory.isEmpty());
 				} else {
