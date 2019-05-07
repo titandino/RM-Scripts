@@ -114,14 +114,14 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				return;
 			}
 
-			if (!Bank.isOpen() && !Bank.open()) {
+			if (!Bank.open()) {
 				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(Landmark.BANK);
 				if (path != null) {
 					path.step();
 				}
 			} else {
-				Execution.delayUntil(() -> Bank.isOpen(), 15000, 30000);
-				Keyboard.pressKey(KeyEvent.VK_3);
+				Execution.delayUntil(() -> Bank.isOpen(), 3500, 6700);
+				Bank.depositInventory();
 				Execution.delayUntil(() -> Inventory.isEmpty(), 3200, 5600);
 				if (Util.gaussian(0, 100, 75) < 30)
 					Keyboard.pressKey(KeyEvent.VK_ESCAPE);
