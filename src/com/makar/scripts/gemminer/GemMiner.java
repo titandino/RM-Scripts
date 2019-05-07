@@ -86,25 +86,13 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				return;
 			}
 
-			if (gemRockName.contains("Precious")) {
-				GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
-				if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
-					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
-				} else {
-					WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(PRECIOUS_MINE);
-					if (path != null && path.step()) {
-						
-					}
-				}
+			GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
+			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
+				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 45000, 65000);
 			} else {
-				GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
-				if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
-					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
-				} else {
-					WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(MINE);
-					if (path != null && path.step()) {
-						
-					}
+				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(gemRockName.contains("Precious") ? PRECIOUS_MINE : MINE);
+				if (path != null && path.step()) {
+					
 				}
 			}
 			break;
