@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.makar.scripts.gemminer.gui.GemGUIController;
 import com.makar.util.Interact;
+import com.makar.util.Util;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.input.Keyboard;
@@ -121,6 +122,9 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 			} else {
 				Execution.delayUntil(() -> Bank.isOpen(), 15000, 30000);
 				Keyboard.pressKey(KeyEvent.VK_3);
+				Execution.delayUntil(() -> Inventory.isEmpty());
+				if (Util.gaussian(0, 100, 75) < 30)
+					Keyboard.pressKey(KeyEvent.VK_ESCAPE);
 			}
 			break;
 		default:
