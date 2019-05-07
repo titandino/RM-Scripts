@@ -148,7 +148,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 	}
 	
 	public String getGemRockType() {
-		if (Skill.MINING.getCurrentLevel() >= 30)
+		if (Skill.MINING.getCurrentLevel() >= 60)
 			return "Precious gem rock";
 		if (Skill.MINING.getCurrentLevel() >= 20)
 			return "Uncommon gem rock";
