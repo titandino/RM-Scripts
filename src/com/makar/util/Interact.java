@@ -19,6 +19,7 @@ public class Interact {
 			} else {
 				Movement.runToWithVariance((Locatable) object, (int) Math.round(Random.nextGaussian(1, 5, 3)));
 			}
+			return true;
 		}
 		return false;
 	}

@@ -88,6 +88,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 
 			GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
 			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
+				Execution.delayWhile(() -> Players.getLocal().isMoving());
 				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 45000, 65000);
 			} else {
 				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(gemRockName.contains("Precious") ? PRECIOUS_MINE : MINE);
