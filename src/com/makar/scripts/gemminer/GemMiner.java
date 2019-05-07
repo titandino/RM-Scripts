@@ -125,6 +125,8 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				Execution.delayUntil(() -> Inventory.isEmpty(), 3200, 5600);
 				if (Util.gaussian(0, 100, 75) < 30)
 					Keyboard.pressKey(KeyEvent.VK_ESCAPE);
+				else
+					Bank.close();
 			}
 			break;
 		default:
