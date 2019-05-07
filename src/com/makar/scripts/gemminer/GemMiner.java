@@ -5,23 +5,27 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import com.makar.scripts.gemminer.gui.GemGUIController;
-import com.makar.util.Antiban;
-import com.makar.util.Interactions;
+import com.makar.util.Interact;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.entities.GameObject;
-import com.runemate.game.api.hybrid.entities.Npc;
+import com.runemate.game.api.hybrid.input.Keyboard;
 import com.runemate.game.api.hybrid.local.Skill;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Bank;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
+import com.runemate.game.api.hybrid.location.Area;
+import com.runemate.game.api.hybrid.location.Coordinate;
+import com.runemate.game.api.hybrid.location.navigation.Landmark;
+import com.runemate.game.api.hybrid.location.navigation.Traversal;
+import com.runemate.game.api.hybrid.location.navigation.web.WebPath;
 import com.runemate.game.api.hybrid.region.GameObjects;
-import com.runemate.game.api.hybrid.region.Npcs;
 import com.runemate.game.api.hybrid.region.Players;
 import com.runemate.game.api.hybrid.util.Resources;
-import com.runemate.game.api.hybrid.util.calculations.Random;
 import com.runemate.game.api.script.Execution;
 import com.runemate.game.api.script.framework.LoopingBot;
 import com.runemate.game.api.script.framework.listeners.InventoryListener;
 import com.runemate.game.api.script.framework.listeners.events.ItemEvent;
+import com.sun.glass.events.KeyEvent;
+
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -29,6 +33,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListener {
+	
+	private static final Area MINE = Area.circular(new Coordinate(3298, 3298, 0), 5);
 
 	private enum Stage {
 		MINING, BANKING
@@ -77,11 +83,13 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				return;
 			}
 
-			GameObject swarm = Npcs.newQuery().names("Swarm").actions("Net").results().nearest();
-			if (swarm != null) {
-				if (Interactions.walkOrTurnTo(swarm, "Net", 70)) {
-					Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2, 1);
-					Antiban.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
+			GameObject gemRock = GameObjects.newQuery().names("Gem Rocks").actions("Mine").results().nearest();
+			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
+				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 2500, 5600);
+			} else {
+				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(MINE);
+				if (path != null && path.step()) {
+					
 				}
 			}
 			break;
@@ -93,12 +101,13 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 			}
 
 			if (!Bank.open()) {
-				
-			}
-			if (net != null) {
-				if (Interactions.walkOrTurnTo(net, "Deposit-All", 75)) {
-					Execution.delayUntil(() -> Inventory.isEmpty());
+				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(Landmark.BANK);
+				if (path != null && path.step()) {
+					
 				}
+			} else {
+				Execution.delayUntil(() -> Bank.isOpen(), 15000, 30000);
+				Keyboard.pressKey(KeyEvent.VK_3);
 			}
 			break;
 		default:

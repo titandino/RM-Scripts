@@ -5,9 +5,11 @@ import com.runemate.game.api.hybrid.entities.details.Locatable;
 import com.runemate.game.api.hybrid.local.Camera;
 import com.runemate.game.api.hybrid.util.calculations.Random;
 
-public class Interactions {
+public class Interact {
 	
 	public static boolean walkOrTurnTo(Interactable object, String option, int chance) {
+		if (object == null)
+			return false;
 		if (object.getVisibility() > 30 && object.interact(option)) {
 			return true;
 		} 
