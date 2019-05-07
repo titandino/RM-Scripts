@@ -115,7 +115,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 			}
 
 			if (!Bank.open()) {
-				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(Landmark.BANK);
+				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).useTeleports(true).buildTo(Landmark.BANK);
 				if (path != null) {
 					path.step();
 				}
