@@ -1,0 +1,27 @@
+<manifest>
+    <main-class>com.makar.scripts.gemminer.GemMiner</main-class>
+    <name>Makar Gem Miner</name>
+    <description>Mines gems in Al Kharid at the best place you can.</description>
+    <tag-line>As horrific and non-modular as it gets.</tag-line><!--Max of 50 chars-->
+    <version>1.0.0</version>
+    <compatibility>
+        <game-type>RS3</game-type>
+    </compatibility>
+    <categories>
+        <category>MINING</category>
+    </categories>
+    <!--Required to publish on the bot store-->
+    <internal-id>makargemmine</internal-id>
+    <!--The rest are optional-->
+    <open-source>true</open-source>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>public</access>
+    <tags>
+        <tag>Makar</tag>
+        <tag>Crafting</tag>
+        <tag>Mining</tag>
+    </tags>
+    <resources>
+		<resource>com/makar/scripts/gemminer/gui/GUI.fxml</resource>
+	</resources>
+</manifest>
