@@ -73,6 +73,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 	@Override
 	public void onStart(String... args) {
 		getEventDispatcher().addListener(this);
+		setLoopDelay(2200, 3600);
 	}
 
 	@Override
@@ -87,9 +88,14 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 			}
 
 			GameObject gemRock = GameObjects.newQuery().names(gemRockName).actions("Mine").results().nearest();
+			if (Players.getLocal().getAnimationId() != -1 && gemRock != null) {
+				gemRock.click();
+				Execution.delay(4000, 6500);
+				return;
+			}
 			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
 				Execution.delayWhile(() -> Players.getLocal().isMoving());
-				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 45000, 65000);
+				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 5000, 15000);
 			} else {
 				WebPath path = Traversal.getDefaultWeb().getPathBuilder().useLodestoneTeleports(true).buildTo(gemRockName.contains("Precious") ? PRECIOUS_MINE : MINE);
 				if (path != null) {
