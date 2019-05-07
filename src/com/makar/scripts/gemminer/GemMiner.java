@@ -30,8 +30,6 @@ import com.runemate.game.api.script.Execution;
 import com.runemate.game.api.script.framework.LoopingBot;
 import com.runemate.game.api.script.framework.listeners.InventoryListener;
 import com.runemate.game.api.script.framework.listeners.events.ItemEvent;
-import com.sun.glass.events.KeyEvent;
-
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -163,7 +161,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				craftingXpBanked = xp;
 				
 				if (Util.gaussian(0, 100, 75) < 30)
-					Keyboard.pressKey(KeyEvent.VK_ESCAPE);
+					Keyboard.pressKey(0x1B);
 				else
 					Bank.close();
 			}

@@ -8,7 +8,7 @@ import com.runemate.game.api.hybrid.location.navigation.basic.BresenhamPath;
 public class Movement {
 
 	public static void runToWithVariance(Locatable locatable, int variance) {
-		if (locatable != null) {
+		if (locatable != null && locatable.getPosition() != null) {
 			Area random = new Area.Rectangular(new Coordinate(locatable.getPosition().getX() - variance, locatable.getPosition().getY() - variance, 0), new Coordinate(locatable.getPosition().getX() + variance, locatable.getPosition().getY() + variance, 0));
 			BresenhamPath path = BresenhamPath.buildTo(random.getRandomCoordinate());
 			if (path != null) {
