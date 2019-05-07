@@ -93,7 +93,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 			if (Players.getLocal().getAnimationId() != -1 && gemRock != null) {
 				if (gemRock.hovered() || gemRock.hover())
 					Mouse.click(Button.LEFT);
-				Execution.delay(4000, 6500);
+				Execution.delay(3300, 4500);
 				return;
 			}
 			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
