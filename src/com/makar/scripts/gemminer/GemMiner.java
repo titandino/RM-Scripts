@@ -14,6 +14,7 @@ import com.runemate.game.api.hybrid.input.Keyboard;
 import com.runemate.game.api.hybrid.input.Mouse;
 import com.runemate.game.api.hybrid.input.Mouse.Button;
 import com.runemate.game.api.hybrid.local.Skill;
+import com.runemate.game.api.hybrid.local.Skills;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Bank;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
 import com.runemate.game.api.hybrid.local.hud.interfaces.SpriteItem;
@@ -188,7 +189,7 @@ public class GemMiner extends LoopingBot implements EmbeddableUI, InventoryListe
 				.append(") Craft: ")
 				.append(new DecimalFormat("#,###,###").format(craftingXpBanked))
 				.append(" XP (")
-				.append(Util.getLevelForXp(craftingXpBanked + Skill.CRAFTING.getExperience()))
+				.append(Skills.getLevelAtExperience(Skill.CRAFTING, (int) (craftingXpBanked + Skill.CRAFTING.getExperience())))
 				.append(")")
 				.toString();
 		Platform.runLater(() -> controller.update());
