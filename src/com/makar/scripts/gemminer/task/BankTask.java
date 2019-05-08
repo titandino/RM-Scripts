@@ -42,7 +42,7 @@ public class BankTask extends Task {
 			}
 		} else {
 			Npc banker = Npcs.newQuery().names("Fremennik banker").results().first();
-			if (banker != null && banker.interact("Bank")) {
+			if (banker != null && banker.interact("Bank") || Bank.isOpen()) {
 				Execution.delayUntil(() -> Bank.isOpen(), 3000, 7000);
 				Bank.depositInventory();
 				Execution.delayUntil(() -> Inventory.isEmpty(), 3200, 5600);
