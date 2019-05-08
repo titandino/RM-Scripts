@@ -53,6 +53,7 @@ public class BankTask extends Task {
 					Bank.close();
 			} else {
 				RegionPath path = RegionPath.buildTo(BANK_TILE);
+				path.setStepDeviation(3);
 				if (path != null) {
 					path.step();
 				}
