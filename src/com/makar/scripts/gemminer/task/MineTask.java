@@ -46,8 +46,8 @@ public class MineTask extends Task {
 				return;
 			}
 			if (Interact.walkOrTurnTo(gemRock, "Mine", 70)) {
-				Execution.delayWhile(() -> Players.getLocal().isMoving(), 3500, 5000);
-				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 5000, 15000);
+				Execution.delay(3000, 6000);
+				Execution.delayWhile(() -> Players.getLocal().isMoving() || Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), 5000, 15000);
 			}
 		} else {
 			GameObject entrance = GameObjects.newQuery().names("Mysterious entrance").results().first();
