@@ -20,6 +20,6 @@
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Text>
-      <Text fx:id="levelText" layoutX="98.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="levelText" layoutX="70.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </Pane>

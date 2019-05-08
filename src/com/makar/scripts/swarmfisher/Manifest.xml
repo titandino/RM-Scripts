@@ -15,7 +15,7 @@
     <!--The rest are optional-->
     <open-source>true</open-source>
     <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
-    <access>public</access>
+    <access>private</access>
     <tags>
         <tag>Makar</tag>
         <tag>Fishing</tag>

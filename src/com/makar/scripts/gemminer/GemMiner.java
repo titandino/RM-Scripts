@@ -2,13 +2,18 @@ package com.makar.scripts.gemminer;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import com.makar.scripts.gemminer.gui.GemGUIController;
 import com.makar.scripts.gemminer.task.BankTask;
 import com.makar.scripts.gemminer.task.MineTask;
 import com.runemate.game.api.client.embeddable.EmbeddableUI;
 import com.runemate.game.api.hybrid.local.Skill;
+import com.runemate.game.api.hybrid.local.Skills;
+import com.runemate.game.api.hybrid.local.hud.interfaces.Bank;
+import com.runemate.game.api.hybrid.local.hud.interfaces.SpriteItem;
 import com.runemate.game.api.hybrid.util.Resources;
 import com.runemate.game.api.script.framework.listeners.InventoryListener;
 import com.runemate.game.api.script.framework.listeners.events.ItemEvent;
@@ -20,7 +25,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener {
-	
 	private ObjectProperty<Node> interfaceProperty;
 	private GemGUIController controller;
 
@@ -28,11 +32,12 @@ public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener
 	private double levelProgress = 0.0;
 	private String levelText = "No data";
 	private String rockType = "Common";
+	private double craftingXpBanked = 0.0;
 
 	public GemMiner() {
 		controller = new GemGUIController(this);
 		setEmbeddableUI(this);
-		add(new BankTask(), new MineTask(this));
+		add(new BankTask(this), new MineTask(this));
 	}
 
 	@Override
@@ -66,8 +71,26 @@ public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener
 		else
 			gemsMined.put(name, "" + (Integer.valueOf(current) + event.getQuantityChange()));
 		levelProgress = (double) (100 - Skill.MINING.getExperienceToNextLevelAsPercent()) / 100.0;
-		levelText = Skill.MINING.getCurrentLevel() + " (TNL: " + new DecimalFormat("#,###,###").format(Skill.MINING.getExperienceToNextLevel()) + ")";
+		levelText = new StringBuilder()
+				.append(Skill.MINING.getCurrentLevel())
+				.append(" (TNL: ")
+				.append(new DecimalFormat("#,###,###").format(Skill.MINING.getExperienceToNextLevel()))
+				.append(") Craft: ")
+				.append(new DecimalFormat("#,###,###").format(craftingXpBanked))
+				.append(" XP (")
+				.append(Skills.getLevelAtExperience(Skill.CRAFTING, (int) (craftingXpBanked + Skill.CRAFTING.getExperience())))
+				.append(")")
+				.toString();
 		Platform.runLater(() -> controller.update());
+	}
+	
+	public void refreshCraftingXP() {
+		double xp = 0;
+		List<SpriteItem> gems = Bank.getItems(Arrays.stream(Uncut.values()).mapToInt(u -> u.getId()).toArray()).asList();
+		for (SpriteItem gem : gems) {
+			xp += Uncut.forId(gem.getId()).getXp() * gem.getQuantity();
+		}
+		craftingXpBanked = xp;
 	}
 	
 	public void setRockType(String rockType) {
