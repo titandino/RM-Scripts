@@ -45,11 +45,9 @@ public class BankTask extends Task {
 			Npc banker = Npcs.newQuery().names("Fremennik banker").results().first();
 			if (Interact.walkOrTurnTo(banker, "Bank", 70) || Bank.isOpen()) {
 				Execution.delayUntil(() -> Bank.isOpen(), 3000, 7000);
-				Execution.delay(1200, 3200, 2623);
 				Bank.depositInventory();
 				Execution.delayUntil(() -> Inventory.isEmpty(), 3200, 5600);
 				script.refreshCraftingXP();
-				Execution.delay(1200, 3200, 2326);
 				if (Util.gaussian(0, 100, 75) < 30)
 					Keyboard.pressKey(KeyEvent.VK_ESCAPE);
 				else
