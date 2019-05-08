@@ -99,7 +99,7 @@ public class WhiteKnightDA extends LoopingBot implements EmbeddableUI {
 						}
 						return;
 					} else if (owner.interact("Trade")) {
-						Execution.delayWhile(() -> !Shop.isOpen());
+						Execution.delayUntil(() -> Shop.isOpen());
 					}
 				}
 			}

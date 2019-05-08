@@ -41,25 +41,8 @@ public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener
 	}
 
 	@Override
-	public ObjectProperty<? extends Node> botInterfaceProperty() {
-		if (interfaceProperty == null) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setController(controller);
-			Node node;
-			try {
-				node = loader.load(Resources.getAsStream("com/makar/scripts/gemminer/gui/GUI.fxml"));
-				interfaceProperty = new SimpleObjectProperty<>(node);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return interfaceProperty;
-	}
-
-	@Override
 	public void onStart(String... args) {
 		getEventDispatcher().addListener(this);
-		//setLoopDelay(2200, 3600);
 	}
 
 	@Override
@@ -73,15 +56,26 @@ public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener
 		levelProgress = (double) (100 - Skill.MINING.getExperienceToNextLevelAsPercent()) / 100.0;
 		levelText = new StringBuilder()
 				.append(Skill.MINING.getCurrentLevel())
-				.append(" (TNL: ")
-				.append(new DecimalFormat("#,###,###").format(Skill.MINING.getExperienceToNextLevel()))
-				.append(") Craft: ")
-				.append(new DecimalFormat("#,###,###").format(craftingXpBanked))
-				.append(" XP (")
-				.append(Skills.getLevelAtExperience(Skill.CRAFTING, (int) (craftingXpBanked + Skill.CRAFTING.getExperience())))
-				.append(")")
+				.append(" (TNL: ").append(new DecimalFormat("#,###,###").format(Skill.MINING.getExperienceToNextLevel()))
+				.append(") Craft: ").append(new DecimalFormat("#,###,###").format(craftingXpBanked))
+				.append(" XP (").append(Skills.getLevelAtExperience(Skill.CRAFTING, (int) (craftingXpBanked + Skill.CRAFTING.getExperience()))).append(")")
 				.toString();
 		Platform.runLater(() -> controller.update());
+	}
+	
+	@Override
+	public ObjectProperty<? extends Node> botInterfaceProperty() {
+		if (interfaceProperty == null) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setController(controller);
+			try {
+				Node node = loader.load(Resources.getAsStream("com/makar/scripts/gemminer/gui/GUI.fxml"));
+				interfaceProperty = new SimpleObjectProperty<>(node);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return interfaceProperty;
 	}
 	
 	public void refreshCraftingXP() {
