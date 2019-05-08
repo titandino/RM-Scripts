@@ -56,7 +56,7 @@ public class Sailfisher extends TaskBot implements EmbeddableUI, InventoryListen
 			FXMLLoader loader = new FXMLLoader();
 			loader.setController(controller);
 			try {
-				Node node = loader.load(Resources.getAsStream("com/makar/scripts/gemminer/gui/GUI.fxml"));
+				Node node = loader.load(Resources.getAsStream("com/makar/scripts/sailfisher/gui/GUI.fxml"));
 				interfaceProperty = new SimpleObjectProperty<>(node);
 			} catch (IOException e) {
 				e.printStackTrace();

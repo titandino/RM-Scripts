@@ -26,9 +26,10 @@ public class FishTask extends Task {
 
 	@Override
 	public void execute() {
-		Npc fish = Npcs.newQuery().names("Sailfish").actions("Fish").results().nearest();
-		if (Interact.walkOrTurnTo(fish, "Fish", 70)) {
-			Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), MIN_AFKWARDEN_TIMER, MAX_AFKWARDEN_TIMER);
+		Npc fish = Npcs.newQuery().names("Sailfish", "Swift sailfish").actions("Catch").results().nearest();
+		if (Interact.walkOrTurnTo(fish, "Catch", 70)) {
+			Execution.delayWhile(() -> Players.getLocal().isMoving());
+			Execution.delayWhile(() ->  Players.getLocal().getAnimationId() != -1 && !Inventory.isFull(), MIN_AFKWARDEN_TIMER, MAX_AFKWARDEN_TIMER);
 			Antiban.mouseOff(((int) Math.round(Random.nextGaussian(20, 40, 35))));
 		} else {
 			RegionPath path = RegionPath.buildTo(FISHING_TILE);
