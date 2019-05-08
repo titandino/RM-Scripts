@@ -17,7 +17,7 @@ public class FishTask extends Task {
 	private static final int MIN_AFKWARDEN_TIMER = 60_000; //60 seconds because nice even number threshholds aren't horrific and definitely human-like
 	private static final int MAX_AFKWARDEN_TIMER = 240_000; //240 seconds
 
-	private static final Coordinate FISHING_TILE = new Coordinate(0);
+	private static final Coordinate FISHING_TILE = new Coordinate(2140, 7129, 0);
 
 	@Override
 	public boolean validate() {

@@ -11,7 +11,7 @@ import com.runemate.game.api.script.framework.task.Task;
 
 public class BankTask extends Task {
 	
-	private static final Coordinate BANK_TILE = new Coordinate(0);
+	private static final Coordinate BANK_TILE = new Coordinate(2123, 7122, 0);
 	
 	@Override
 	public boolean validate() {
