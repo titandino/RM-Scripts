@@ -34,8 +34,8 @@ public class FishTask extends Task {
 		} else {
 			RegionPath path = RegionPath.buildTo(FISHING_TILE);
 			path.setStepDeviation(5);
-			if (path != null)
-				path.step();
+			if (path != null && path.step())
+				Execution.delayWhile(() -> Players.getLocal().isMoving(), 6000, 12000);
 		}
 	}
 }
