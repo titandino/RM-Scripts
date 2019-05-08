@@ -26,7 +26,6 @@
       </font>
     </Text>
     <Text fx:id="levelText" layoutX="70.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-    <ComboBox fx::id="rockTypeSelector" layoutX="98.0" layoutY="190.0" prefHeight="21.0" prefWidth="122.3857421875" promptText="Gem Rock Type">
-    </ComboBox>
+    <ComboBox fx:id="rockTypeSelector" layoutX="98.0" layoutY="190.0" prefHeight="21.0" prefWidth="122.3857421875" promptText="Gem Rock Type"/>
   </children>
 </Pane>
