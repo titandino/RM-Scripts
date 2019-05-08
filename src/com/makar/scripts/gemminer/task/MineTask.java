@@ -53,8 +53,10 @@ public class MineTask extends Task {
 			if (script.getRockType().equals("Precious") && entrance != null) {
 				Interact.walkOrTurnTo(entrance, "Enter", 70);
 			} else {
-				if (!MINE_PATH.step()) {
+				if (MINE_PATH.getNext().distanceTo(Players.getLocal()) > 50) {
 					Lodestone.AL_KHARID.teleport();
+				} else {
+					MINE_PATH.step();
 				}
 			}
 		}
