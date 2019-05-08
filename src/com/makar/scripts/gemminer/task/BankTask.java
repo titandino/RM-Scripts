@@ -54,8 +54,8 @@ public class BankTask extends Task {
 			} else {
 				RegionPath path = RegionPath.buildTo(BANK_TILE);
 				path.setStepDeviation(3);
-				if (path != null) {
-					path.step();
+				if (path != null && path.step()) {
+					Execution.delayWhile(() -> Players.getLocal().isMoving(), 5000, 11000);
 				}
 			}
 		}
