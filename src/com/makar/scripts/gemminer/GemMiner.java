@@ -31,7 +31,7 @@ public class GemMiner extends TaskBot implements EmbeddableUI, InventoryListener
 	private HashMap<String, String> gemsMined = new HashMap<String, String>();
 	private double levelProgress = 0.0;
 	private String levelText = "No data";
-	private String rockType = "Common";
+	private String rockType = "Uncommon";
 	private double craftingXpBanked = 0.0;
 
 	public GemMiner() {

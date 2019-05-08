@@ -37,7 +37,7 @@ public class BankTask extends Task {
 	public void execute() {
 		if (!BANK_AREA.contains(Players.getLocal())) {
 			SpriteItem ring = Equipment.getItems("Ring of kinship").first();
-			if (ring != null && ring.interact("Teleport to Damonheim")) {
+			if (ring != null && ring.interact("Teleport to Daemonheim")) {
 				Execution.delayWhile(() -> Players.getLocal().getAnimationId() != -1, 15000, 20000);
 			}
 		} else {
