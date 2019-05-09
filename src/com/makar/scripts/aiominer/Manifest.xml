@@ -1,0 +1,26 @@
+<manifest>
+    <main-class>com.makar.scripts.aiominer.AIOMiner</main-class>
+    <name>Makar AIO Miner</name>
+    <description>Mines ore anywhere</description>
+    <tag-line>As horrific and non-modular as it gets.</tag-line><!--Max of 50 chars-->
+    <version>1.0.0</version>
+    <compatibility>
+        <game-type>RS3</game-type>
+    </compatibility>
+    <categories>
+        <category>MINING</category>
+    </categories>
+    <!--Required to publish on the bot store-->
+    <internal-id>makaraiominer</internal-id>
+    <!--The rest are optional-->
+    <open-source>true</open-source>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>private</access>
+    <tags>
+        <tag>Makar</tag>
+        <tag>Mining</tag>
+    </tags>
+    <resources>
+		<resource>com/makar/scripts/aiominer/gui/GUI.fxml</resource>
+	</resources>
+</manifest>

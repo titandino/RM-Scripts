@@ -7,9 +7,8 @@ import com.runemate.game.api.hybrid.util.calculations.Random;
 
 public class Antiban {
 
-	public static void mouseOff(Integer chance) {
-		double rand = Random.nextGaussian(0, 100, chance);
-		if (rand < chance) {
+	public static void mouseOff(int chance) {
+		if (Util.gaussian(0, 100, chance) < chance) {
 			Mouse.move(new InteractablePoint(getOffScreenX(), getOffScreenY()));
 		}
 	}
