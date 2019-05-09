@@ -28,14 +28,14 @@ public class Interact {
 	private static boolean walkOrTurnTo(Interactable object, Object option, int chance, boolean pattern) {
 		if (object == null)
 			return false;
-		if (object.getVisibility() > 30 && (pattern ? object.interact((Pattern) option) : object.interact((String) option))) {
+		if (object.isVisible() && (pattern ? object.interact((Pattern) option) : object.interact((String) option))) {
 			return true;
 		} 
 		if (object instanceof Locatable) {
-			if (Random.nextGaussian(0, 100) > chance) {
+			if (Random.nextGaussian(0, 100) < chance) {
 				Camera.concurrentlyTurnTo((Locatable) object);
 			} else {
-				Movement.runToWithVariance((Locatable) object, Util.gaussian(1, 5, 3));
+				Movement.runToWithVariance((Locatable) object, Util.gaussian(1, 4, 2));
 			}
 			return true;
 		}
