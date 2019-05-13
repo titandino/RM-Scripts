@@ -1,7 +1,9 @@
 package com.makar.scripts.gemminer.task;
 
 import com.makar.scripts.gemminer.GemMiner;
+import com.makar.util.Antiban;
 import com.makar.util.Interact;
+import com.makar.util.Util;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.input.Mouse;
 import com.runemate.game.api.hybrid.input.Mouse.Button;
@@ -42,6 +44,10 @@ public class MineTask extends Task {
 			if (Players.getLocal().getAnimationId() != -1 && gemRock != null) {
 				if (gemRock.hovered() || gemRock.hover())
 					Mouse.click(Button.LEFT);
+				if (Util.gaussian(0, 1000, 400) < 100) {
+					Antiban.mouseOff(60);
+					Execution.delay(25000, 50000);
+				}
 				Execution.delay(3300, 4500);
 				return;
 			}
