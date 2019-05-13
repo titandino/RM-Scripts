@@ -11,7 +11,10 @@ public enum Ore {
 	COPPER(new QuickDepositAll(), new MineOre("Copper rock")),
 	TIN(new QuickDepositAll(), new MineOre("Tin rock")),
 	COAL(),
-	IRON(new TravelTo(new Coordinate(3013, 9812, 0), () -> Inventory.isFull()), new QuickDepositAll(), new TravelTo(new Coordinate(3049, 9782, 0), () -> !Inventory.isFull()), new MineOre("Iron rock"));
+	IRON(new TravelTo(new Coordinate(3013, 9812, 0), () -> Inventory.isFull()), 
+			new QuickDepositAll(), 
+			new TravelTo(new Coordinate(3049, 9782, 0), () -> !Inventory.isFull()), 
+			new MineOre("Iron rock"));
 	
 	private Task[] tasks;
 	
