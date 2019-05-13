@@ -1,5 +1,7 @@
 package com.makar.scripts.gemminer.task;
 
+import java.awt.event.KeyEvent;
+
 import com.makar.scripts.gemminer.GemMiner;
 import com.makar.util.Interact;
 import com.makar.util.Util;
@@ -16,7 +18,6 @@ import com.runemate.game.api.hybrid.region.Npcs;
 import com.runemate.game.api.hybrid.region.Players;
 import com.runemate.game.api.script.Execution;
 import com.runemate.game.api.script.framework.task.Task;
-import com.sun.glass.events.KeyEvent;
 
 public class BankTask extends Task {
 	
