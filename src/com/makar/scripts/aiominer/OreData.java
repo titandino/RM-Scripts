@@ -21,7 +21,8 @@ public class OreData {
 		
 		TIN(new QuickDepositAll(), new MineOre("Tin rock")), 
 		
-		IRON(new TravelTo(new Coordinate(3013, 9812, 0), PredefinedPath.create(IRON_BANK_PATH), () -> Inventory.isFull()),
+		IRON(/*new HideFromCombat(new Coordinate(3048, 9782, 0)),*/
+				new TravelTo(new Coordinate(3013, 9812, 0), PredefinedPath.create(IRON_BANK_PATH), () -> Inventory.isFull()),
 				new QuickDepositAll(), 
 				new TravelTo(new Coordinate(3049, 9782, 0), PredefinedPath.create(IRON_MINE_PATH), () -> !Inventory.isFull()), 
 				new MineOre("Iron rock"));
