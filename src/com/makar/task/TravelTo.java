@@ -8,6 +8,7 @@ import com.runemate.game.api.hybrid.location.navigation.Path;
 import com.runemate.game.api.hybrid.location.navigation.Traversal;
 import com.runemate.game.api.hybrid.location.navigation.basic.PredefinedPath;
 import com.runemate.game.api.hybrid.region.Players;
+import com.runemate.game.api.hybrid.region.Region;
 import com.runemate.game.api.script.framework.task.Task;
 
 public class TravelTo extends Task {
@@ -34,6 +35,8 @@ public class TravelTo extends Task {
 
 	@Override
 	public void execute() {
+		if (!Region.isCachingCollisionFlags())
+			Region.cacheCollisionFlags(true);
 		if (path == null || path.getNext() == null) {
 			path = pathCoords != null ? PredefinedPath.create(pathCoords) : Traversal.getDefaultWeb().getPathBuilder().buildTo(target);
 		}
