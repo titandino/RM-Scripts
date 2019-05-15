@@ -10,21 +10,24 @@ import com.runemate.game.api.hybrid.region.Players;
 import com.runemate.game.api.script.framework.task.Task;
 
 public class TravelTo extends Task {
-	
+
 	private Supplier<Boolean> validation;
 	private Coordinate target;
 	private Path path;
-	
+
 	public TravelTo(Coordinate target, Path path, Supplier<Boolean> validation) {
 		this.target = target;
 		this.path = path;
 		this.validation = validation;
+		if (path instanceof PredefinedPath) {
+			((PredefinedPath) path).setStepDeviation(3);
+		}
 	}
-	
+
 	public TravelTo(Coordinate target, Supplier<Boolean> validation) {
 		this(target, null, validation);
 	}
-	
+
 	@Override
 	public boolean validate() {
 		return Players.getLocal().getPosition().distanceTo(target) > 5 && (validation != null ? validation.get() : true);
