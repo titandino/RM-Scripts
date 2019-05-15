@@ -9,7 +9,6 @@ import com.makar.task.TravelTo;
 import com.makar.util.Util;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
 import com.runemate.game.api.hybrid.location.Coordinate;
-import com.runemate.game.api.hybrid.location.navigation.basic.PredefinedPath;
 import com.runemate.game.api.script.framework.task.Task;
 
 public class OreData {
@@ -17,13 +16,13 @@ public class OreData {
 	private static List<Coordinate> IRON_MINE_PATH = Util.reverseList(IRON_BANK_PATH);
 
 	public enum Ore {
-		COPPER(new QuickDepositAll(), new MineOre("Copper rock")), 
+		COPPER(new QuickDepositAll(), new MineOre("Copper rock")),
 		
 		TIN(new QuickDepositAll(), new MineOre("Tin rock")),
 		
-		IRON(new TravelTo(new Coordinate(3187, 3424, 0), PredefinedPath.create(IRON_BANK_PATH), () -> Inventory.isFull()),
+		IRON(new TravelTo(new Coordinate(3187, 3424, 0), IRON_BANK_PATH, () -> Inventory.isFull()),
 				new QuickDepositAll(), 
-				new TravelTo(new Coordinate(3181, 3373, 0), PredefinedPath.create(IRON_MINE_PATH), () -> !Inventory.isFull()), 
+				new TravelTo(new Coordinate(3181, 3373, 0), IRON_MINE_PATH, () -> !Inventory.isFull()), 
 				new MineOre("Iron rock"));
 
 		private Task[] tasks;

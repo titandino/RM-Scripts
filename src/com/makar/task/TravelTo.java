@@ -1,5 +1,6 @@
 package com.makar.task;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import com.runemate.game.api.hybrid.location.Coordinate;
@@ -13,15 +14,13 @@ public class TravelTo extends Task {
 
 	private Supplier<Boolean> validation;
 	private Coordinate target;
+	private List<Coordinate> pathCoords;
 	private Path path;
 
-	public TravelTo(Coordinate target, Path path, Supplier<Boolean> validation) {
+	public TravelTo(Coordinate target, List<Coordinate> pathCoords, Supplier<Boolean> validation) {
 		this.target = target;
-		this.path = path;
+		this.pathCoords = pathCoords;
 		this.validation = validation;
-		if (path instanceof PredefinedPath) {
-			((PredefinedPath) path).setStepDeviation(3);
-		}
 	}
 
 	public TravelTo(Coordinate target, Supplier<Boolean> validation) {
@@ -35,8 +34,8 @@ public class TravelTo extends Task {
 
 	@Override
 	public void execute() {
-		if (path == null || (!(path instanceof PredefinedPath) && path.getNext() == null)) {
-			path = Traversal.getDefaultWeb().getPathBuilder().buildTo(target);
+		if (path == null || path.getNext() == null) {
+			path = pathCoords != null ? PredefinedPath.create(pathCoords) : Traversal.getDefaultWeb().getPathBuilder().buildTo(target);
 		}
 		if (path != null)
 			path.step();
