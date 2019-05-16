@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 import com.makar.util.Interact;
 import com.makar.util.Interface;
 import com.runemate.game.api.hybrid.entities.GameObject;
-import com.runemate.game.api.hybrid.local.hud.interfaces.Interfaces;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
 import com.runemate.game.api.hybrid.region.GameObjects;
 import com.runemate.game.api.hybrid.region.Players;
@@ -26,8 +25,9 @@ public class QuickDepositAll extends Task {
 	
 	@Override
 	public void execute() {
-		if (Interface.close(Interfaces.getAt(37, 42)))
+		if (Interface.close(37, 42)) {
 			return;
+		}
 		if (Interact.walkOrTurnTo(deposit, Pattern.compile(".*Deposit-All.*"))) {
 			Execution.delayWhile(() -> Players.getLocal().isMoving() || Inventory.isFull(), 6000, 15000);
 		}
