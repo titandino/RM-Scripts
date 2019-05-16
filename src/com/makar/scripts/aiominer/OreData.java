@@ -30,7 +30,7 @@ public class OreData {
 		
 		MITHRIL(new TravelTo(new Coordinate(3187, 3424, 0), MITHRIL_BANK_PATH, () -> Inventory.isFull()),
 				new QuickDepositAll(), 
-				new TravelTo(new Coordinate(3181, 3373, 0), MITHRIL_MINE_PATH, () -> !Inventory.isFull()), 
+				new TravelTo(new Coordinate(3184, 3376, 0), MITHRIL_MINE_PATH, () -> !Inventory.isFull()), 
 				new MineOre("Mithril rock"));
 
 		private Task[] tasks;
