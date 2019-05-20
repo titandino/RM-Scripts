@@ -20,6 +20,9 @@ public class OreData {
 	private static List<Coordinate> MITHRIL_BANK_PATH = Arrays.asList(new Coordinate[] {new Coordinate(3184, 3376, 0), new Coordinate(3179, 3376, 0), new Coordinate(3179, 3380, 0), new Coordinate(3177, 3384, 0), new Coordinate(3175, 3388, 0), new Coordinate(3173, 3392, 0), new Coordinate(3171, 3396, 0), new Coordinate(3169, 3400, 0), new Coordinate(3171, 3403, 0), new Coordinate(3171, 3407, 0), new Coordinate(3172, 3410, 0), new Coordinate(3172, 3413, 0), new Coordinate(3172, 3416, 0), new Coordinate(3172, 3419, 0), new Coordinate(3172, 3422, 0), new Coordinate(3173, 3424, 0), new Coordinate(3175, 3426, 0), new Coordinate(3178, 3425, 0), new Coordinate(3181, 3425, 0), new Coordinate(3183, 3424, 0), new Coordinate(3187, 3424, 0)});
 	private static List<Coordinate> MITHRIL_MINE_PATH = Util.reverseList(MITHRIL_BANK_PATH);
 	
+	private static List<Coordinate> ADAMANT_BANK_PATH = Arrays.asList(new Coordinate[] { new Coordinate(3291, 3359, 0), new Coordinate(3289, 3362, 0), new Coordinate(3288, 3366, 0), new Coordinate(3288, 3370, 0), new Coordinate(3290, 3372, 0), new Coordinate(3292, 3374, 0), new Coordinate(3293, 3377, 0), new Coordinate(3294, 3380, 0), new Coordinate(3293, 3384, 0), new Coordinate(3292, 3388, 0), new Coordinate(3291, 3393, 0), new Coordinate(3291, 3396, 0), new Coordinate(3291, 3399, 0), new Coordinate(3290, 3402, 0), new Coordinate(3289, 3406, 0), new Coordinate(3289, 3409, 0), new Coordinate(3288, 3412, 0), new Coordinate(3286, 3415, 0), new Coordinate(3285, 3418, 0), new Coordinate(3284, 3421, 0), new Coordinate(3283, 3424, 0), new Coordinate(3281, 3426, 0), new Coordinate(3278, 3428, 0), new Coordinate(3275, 3428, 0), new Coordinate(3271, 3428, 0), new Coordinate(3267, 3428, 0), new Coordinate(3264, 3428, 0), new Coordinate(3260, 3429, 0), new Coordinate(3256, 3429, 0), new Coordinate(3253, 3429, 0), new Coordinate(3250, 3429, 0), new Coordinate(3247, 3429, 0), new Coordinate(3244, 3429, 0), new Coordinate(3241, 3429, 0), new Coordinate(3238, 3430, 0), new Coordinate(3235, 3430, 0), new Coordinate(3232, 3430, 0), new Coordinate(3230, 3430, 0), new Coordinate(3229, 3434, 0) });
+	private static List<Coordinate> ADAMANT_MINE_PATH = Util.reverseList(ADAMANT_BANK_PATH);
+	
 	public enum Ore {
 		COPPER(new QuickDepositAll(), new MineOre("Copper rock")),
 		
@@ -30,15 +33,17 @@ public class OreData {
 				new TravelTo(new Coordinate(3181, 3373, 0), IRON_MINE_PATH, () -> !Inventory.isFull()), 
 				new MineOre("Iron rock")),
 		
-		COAL(), //TODO https://runescape.wiki/w/Gunnarsgrunn_mine probably best ore bank
-		//https://runescape.wiki/w/Lumbridge_south-west_mine definitely best banking location
+		COAL(new QuickDepositAll(), new MineOre("Coal rock")),
 		
 		MITHRIL(new TravelTo(new Coordinate(3187, 3424, 0), MITHRIL_BANK_PATH, () -> Inventory.isFull()),
 				new QuickDepositAll(), 
 				new TravelTo(new Coordinate(3184, 3376, 0), MITHRIL_MINE_PATH, () -> !Inventory.isFull()), 
 				new MineOre("Mithril rock")),
 		
-		ADAMANTITE(), //TODO https://runescape.wiki/w/Varrock_South-East_mine probably best?
+		ADAMANTITE(new TravelTo(new Coordinate(3229, 3434, 0), ADAMANT_BANK_PATH, () -> Inventory.isFull()),
+				new QuickDepositAll(), 
+				new TravelTo(new Coordinate(3289, 3361, 0), ADAMANT_MINE_PATH, () -> !Inventory.isFull()), 
+				new MineOre("Adamantite rock")),
 		
 		LUMINITE(), //TODO https://runescape.wiki/w/Dwarven_luminite_mine aggro monsters
 		//https://runescape.wiki/w/Mining_Guild_resource_dungeon 45 dg 60 mining but safe
