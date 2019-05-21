@@ -6,6 +6,7 @@ import com.makar.util.Util;
 import com.runemate.game.api.hybrid.entities.GameObject;
 import com.runemate.game.api.hybrid.input.Mouse;
 import com.runemate.game.api.hybrid.input.Mouse.Button;
+import com.runemate.game.api.hybrid.local.hud.interfaces.ChatDialog;
 import com.runemate.game.api.hybrid.local.hud.interfaces.Inventory;
 import com.runemate.game.api.hybrid.region.GameObjects;
 import com.runemate.game.api.hybrid.region.Players;
@@ -31,6 +32,9 @@ public class MineOre extends Task {
 
 	@Override
 	public void execute() {
+		if (ChatDialog.isOpen()) {
+			Interact.walkOrTurnTo(rock, "Mine");
+		}
 		if (Players.getLocal().getAnimationId() != -1 && rock != null) {
 			if (rock.hovered() || rock.hover())
 				Mouse.click(Button.LEFT);
