@@ -34,6 +34,7 @@ public class MineOre extends Task {
 	public void execute() {
 		if (ChatDialog.isOpen()) {
 			Interact.walkOrTurnTo(rock, "Mine");
+			return;
 		}
 		if (Players.getLocal().getAnimationId() != -1 && rock != null) {
 			if (rock.hovered() || rock.hover())
